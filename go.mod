@@ -1,4 +1,4 @@
-module zero-admin-learn/api/doc
+module zero-admin-learn
 
 go 1.19
 
