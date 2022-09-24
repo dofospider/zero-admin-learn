@@ -4,27 +4,27 @@ import (
 	"context"
 
 	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sys"
+	"zero-admin-learn/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type PingLogic struct {
+type RoleAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PingLogic {
-	return &PingLogic{
+func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAddLogic {
+	return &RoleAddLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *PingLogic) Ping(in *sys.Request) (*sys.Response, error) {
+func (l *RoleAddLogic) RoleAdd(in *sysclient.RoleAddReq) (*sysclient.RoleAddResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &sys.Response{}, nil
+	return &sysclient.RoleAddResp{}, nil
 }

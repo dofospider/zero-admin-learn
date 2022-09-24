@@ -7,7 +7,7 @@ import (
 	"zero-admin-learn/rpc/sys/internal/config"
 	"zero-admin-learn/rpc/sys/internal/server"
 	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sys"
+	"zero-admin-learn/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -26,7 +26,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		sys.RegisterSysServer(grpcServer, server.NewSysServer(ctx))
+		sysclient.RegisterSysServer(grpcServer, server.NewSysServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
