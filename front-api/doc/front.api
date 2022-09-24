@@ -1,0 +1,15 @@
+import "api/address.api"
+import "api/auth.api"
+import "api/cart.api"
+import "api/category.api"
+import "api/collect.api"
+import "api/home.api"
+import "api/order.api"
+import "api/product.api"
+
+info(
+	title: "shop_flutter"
+	desc: "shop_flutter App接口"
+	author: "koobe"
+	email: "1002219331@qq.com"
+)
