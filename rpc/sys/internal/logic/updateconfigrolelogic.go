@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +23,8 @@ func NewUpdateConfigRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-func (l *UpdateConfigRoleLogic) UpdateConfigRole(in *sysclient.UpdateConfigRoleReq) (*sysclient.UpdateConfigRoleResp, error) {
+func (l *UpdateConfigRoleLogic) UpdateConfigRole(in *sys.UpdateConfigRoleReq) (*sys.UpdateConfigRoleResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &sysclient.UpdateConfigRoleResp{}, nil
+	return &sys.UpdateConfigRoleResp{}, nil
 }

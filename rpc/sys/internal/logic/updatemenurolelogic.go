@@ -2,11 +2,11 @@ package logic
 
 import (
 	"context"
-
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 )
 
 type UpdateMenuRoleLogic struct {
@@ -23,8 +23,20 @@ func NewUpdateMenuRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 	}
 }
 
-func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
-	// todo: add your logic here and delete this line
+func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sys.UpdateMenuRoleReq) (*sys.UpdateMenuRoleResp, error) {
+	_ = l.svcCtx.RoleMenuModel.Delete(in.RoleId)
 
-	return &sysclient.UpdateMenuRoleResp{}, nil
+	ids := in.MenuIds
+	for _, id := range ids {
+		_, _ = l.svcCtx.RoleMenuModel.Insert(sysmodel.SysRoleMenu{
+			RoleId:         in.RoleId,
+			MenuId:         id,
+			CreateBy:       "admin",
+			CreateTime:     time.Now(),
+			LastUpdateBy:   "admin",
+			LastUpdateTime: time.Now(),
+		})
+	}
+
+	return &sys.UpdateMenuRoleResp{}, nil
 }

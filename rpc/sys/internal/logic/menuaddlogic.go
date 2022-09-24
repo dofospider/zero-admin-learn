@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +25,31 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 	}
 }
 
-func (l *MenuAddLogic) MenuAdd(in *sysclient.MenuAddReq) (*sysclient.MenuAddResp, error) {
-	// todo: add your logic here and delete this line
+func (l *MenuAddLogic) MenuAdd(in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
+	_, err := l.svcCtx.MenuModel.Insert(sysmodel.SysMenu{
+		Id:             0,
+		Name:           in.Name,
+		ParentId:       in.ParentId,
+		Url:            in.Url,
+		Perms:          in.Perms,
+		Type:           in.Type,
+		Icon:           in.Icon,
+		OrderNum:       in.OrderNum,
+		CreateBy:       in.CreateBy,
+		CreateTime:     time.Time{},
+		LastUpdateBy:   in.CreateBy,
+		LastUpdateTime: time.Now(),
+		DelFlag:        0,
+		VuePath:        in.VuePath,
+		VueComponent:   in.VueComponent,
+		VueIcon:        in.VueIcon,
+		VueRedirect:    in.VueRedirect,
+	})
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &sysclient.MenuAddResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.MenuAddResp{}, nil
 }

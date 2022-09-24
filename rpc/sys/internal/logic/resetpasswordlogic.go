@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +25,15 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReS
 	}
 }
 
-func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sysclient.ReSetPasswordResp, error) {
-	// todo: add your logic here and delete this line
+func (l *ReSetPasswordLogic) ReSetPassword(in *sys.ReSetPasswordReq) (*sys.ReSetPasswordResp, error) {
 
-	return &sysclient.ReSetPasswordResp{}, nil
+	_ = l.svcCtx.UserModel.Update(sysmodel.SysUser{
+		Id:             in.Id,
+		Password:       "123456",
+		Salt:           "123456",
+		LastUpdateBy:   in.LastUpdateBy,
+		LastUpdateTime: time.Now(),
+	})
+
+	return &sys.ReSetPasswordResp{}, nil
 }

@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +23,12 @@ func NewJobDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobDele
 	}
 }
 
-func (l *JobDeleteLogic) JobDelete(in *sysclient.JobDeleteReq) (*sysclient.JobDeleteResp, error) {
-	// todo: add your logic here and delete this line
+func (l *JobDeleteLogic) JobDelete(in *sys.JobDeleteReq) (*sys.JobDeleteResp, error) {
+	err := l.svcCtx.JobModel.Delete(in.Id)
 
-	return &sysclient.JobDeleteResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.JobDeleteResp{}, nil
 }

@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +23,12 @@ func NewLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Lo
 	}
 }
 
-func (l *LoginLogDeleteLogic) LoginLogDelete(in *sysclient.LoginLogDeleteReq) (*sysclient.LoginLogDeleteResp, error) {
-	// todo: add your logic here and delete this line
+func (l *LoginLogDeleteLogic) LoginLogDelete(in *sys.LoginLogDeleteReq) (*sys.LoginLogDeleteResp, error) {
+	err := l.svcCtx.LoginLogModel.Delete(in.Id)
 
-	return &sysclient.LoginLogDeleteResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.LoginLogDeleteResp{}, nil
 }

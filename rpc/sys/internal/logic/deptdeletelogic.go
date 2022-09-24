@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +23,12 @@ func NewDeptDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptDe
 	}
 }
 
-func (l *DeptDeleteLogic) DeptDelete(in *sysclient.DeptDeleteReq) (*sysclient.DeptDeleteResp, error) {
-	// todo: add your logic here and delete this line
+func (l *DeptDeleteLogic) DeptDelete(in *sys.DeptDeleteReq) (*sys.DeptDeleteResp, error) {
+	err := l.svcCtx.DeptModel.Delete(in.Id)
 
-	return &sysclient.DeptDeleteResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.DeptDeleteResp{}, nil
 }

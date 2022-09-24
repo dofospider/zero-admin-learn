@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +25,23 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 	}
 }
 
-func (l *DictUpdateLogic) DictUpdate(in *sysclient.DictUpdateReq) (*sysclient.DictUpdateResp, error) {
-	// todo: add your logic here and delete this line
+func (l *DictUpdateLogic) DictUpdate(in *sys.DictUpdateReq) (*sys.DictUpdateResp, error) {
+	err := l.svcCtx.DictModel.Update(sysmodel.SysDict{
+		Id:             in.Id,
+		Value:          in.Value,
+		Label:          in.Label,
+		Type:           in.Type,
+		Description:    in.Description,
+		Sort:           float64(in.Sort),
+		LastUpdateBy:   in.LastUpdateBy,
+		LastUpdateTime: time.Now(),
+		Remarks:        in.Remarks,
+		DelFlag:        0,
+	})
 
-	return &sysclient.DictUpdateResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.DictUpdateResp{}, nil
 }

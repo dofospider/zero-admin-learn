@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
-
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +24,22 @@ func NewConfigAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ConfigA
 	}
 }
 
-func (l *ConfigAddLogic) ConfigAdd(in *sysclient.ConfigAddReq) (*sysclient.ConfigAddResp, error) {
-	// todo: add your logic here and delete this line
+func (l *ConfigAddLogic) ConfigAdd(in *sys.ConfigAddReq) (*sys.ConfigAddResp, error) {
+	_, err := l.svcCtx.ConfigModel.Insert(sysmodel.SysConfig{
+		Value:          in.Value,
+		Label:          in.Label,
+		Type:           in.Type,
+		Description:    in.Description,
+		Sort:           float64(in.Sort),
+		CreateBy:       in.CreateBy,
+		LastUpdateTime: time.Now(),
+		LastUpdateBy:   in.CreateBy,
+		Remarks:        in.Remarks,
+		DelFlag:        0,
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return &sysclient.ConfigAddResp{}, nil
+	return &sys.ConfigAddResp{}, nil
 }

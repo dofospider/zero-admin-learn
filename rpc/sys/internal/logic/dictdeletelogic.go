@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +23,12 @@ func NewDictDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDe
 	}
 }
 
-func (l *DictDeleteLogic) DictDelete(in *sysclient.DictDeleteReq) (*sysclient.DictDeleteResp, error) {
-	// todo: add your logic here and delete this line
+func (l *DictDeleteLogic) DictDelete(in *sys.DictDeleteReq) (*sys.DictDeleteResp, error) {
+	err := l.svcCtx.DictModel.Delete(in.Id)
 
-	return &sysclient.DictDeleteResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.DictDeleteResp{}, nil
 }

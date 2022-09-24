@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +25,19 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptUp
 	}
 }
 
-func (l *DeptUpdateLogic) DeptUpdate(in *sysclient.DeptUpdateReq) (*sysclient.DeptUpdateResp, error) {
-	// todo: add your logic here and delete this line
+func (l *DeptUpdateLogic) DeptUpdate(in *sys.DeptUpdateReq) (*sys.DeptUpdateResp, error) {
+	err := l.svcCtx.DeptModel.Update(sysmodel.SysDept{
+		Id:             in.Id,
+		Name:           in.Name,
+		ParentId:       in.ParentId,
+		OrderNum:       in.OrderNum,
+		LastUpdateBy:   in.LastUpdateBy,
+		LastUpdateTime: time.Now(),
+	})
 
-	return &sysclient.DeptUpdateResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.DeptUpdateResp{}, nil
 }

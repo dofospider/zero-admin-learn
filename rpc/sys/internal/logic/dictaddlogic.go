@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +25,23 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictAddLo
 	}
 }
 
-func (l *DictAddLogic) DictAdd(in *sysclient.DictAddReq) (*sysclient.DictAddResp, error) {
-	// todo: add your logic here and delete this line
+func (l *DictAddLogic) DictAdd(in *sys.DictAddReq) (*sys.DictAddResp, error) {
+	_, err := l.svcCtx.DictModel.Insert(sysmodel.SysDict{
+		Value:          in.Value,
+		Label:          in.Label,
+		Type:           in.Type,
+		Description:    in.Description,
+		Sort:           float64(in.Sort),
+		CreateBy:       in.CreateBy,
+		LastUpdateBy:   in.CreateBy,
+		LastUpdateTime: time.Now(),
+		Remarks:        in.Remarks,
+		DelFlag:        0,
+	})
 
-	return &sysclient.DictAddResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &sys.DictAddResp{}, nil
 }

@@ -2,9 +2,8 @@ package logic
 
 import (
 	"context"
-
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +22,16 @@ func NewQueryMenuByRoleIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(in *sysclient.QueryMenuByRoleIdReq) (*sysclient.QueryMenuByRoleIdResp, error) {
-	// todo: add your logic here and delete this line
+func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(in *sys.QueryMenuByRoleIdReq) (*sys.QueryMenuByRoleIdResp, error) {
+	RoleMenus, _ := l.svcCtx.RoleMenuModel.FindByRoleId(in.Id)
 
-	return &sysclient.QueryMenuByRoleIdResp{}, nil
+	var list []int64
+	for _, user := range *RoleMenus {
+
+		list = append(list, user.MenuId)
+	}
+
+	return &sys.QueryMenuByRoleIdResp{
+		Ids: list,
+	}, nil
 }

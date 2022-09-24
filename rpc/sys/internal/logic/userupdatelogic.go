@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"time"
+	"zero-admin/rpc/model/sysmodel"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +25,32 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUp
 	}
 }
 
-func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.UserUpdateResp, error) {
-	// todo: add your logic here and delete this line
+func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp, error) {
 
-	return &sysclient.UserUpdateResp{}, nil
+	_ = l.svcCtx.UserModel.Update(sysmodel.SysUser{
+		Id:             in.Id,
+		Name:           in.Name,
+		NickName:       in.NickName,
+		Avatar:         in.Avatar,
+		Email:          in.Email,
+		Mobile:         in.Mobile,
+		DeptId:         in.DeptId,
+		LastUpdateBy:   in.LastUpdateBy,
+		Status:         in.Status,
+		LastUpdateTime: time.Now(),
+		JobId:          in.JobId,
+	})
+
+	_ = l.svcCtx.UserRoleModel.Delete(in.Id)
+
+	_, _ = l.svcCtx.UserRoleModel.Insert(sysmodel.SysUserRole{
+		UserId:         in.Id,
+		RoleId:         in.RoleId,
+		CreateBy:       "admin",
+		CreateTime:     time.Now(),
+		LastUpdateBy:   "admin",
+		LastUpdateTime: time.Now(),
+	})
+
+	return &sys.UserUpdateResp{}, nil
 }

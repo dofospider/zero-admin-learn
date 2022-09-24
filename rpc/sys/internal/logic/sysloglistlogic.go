@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
-	"zero-admin-learn/rpc/sys/internal/svc"
-	"zero-admin-learn/rpc/sys/sysclient"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +24,34 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLog
 	}
 }
 
-func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.SysLogListResp, error) {
-	// todo: add your logic here and delete this line
+func (l *SysLogListLogic) SysLogList(in *sys.SysLogListReq) (*sys.SysLogListResp, error) {
+	all, err := l.svcCtx.SysLogModel.FindAll(in.Current, in.PageSize)
+	count, _ := l.svcCtx.SysLogModel.Count()
 
-	return &sysclient.SysLogListResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+	var list []*sys.SysLogListData
+	for _, log := range *all {
+		fmt.Println(log)
+		list = append(list, &sys.SysLogListData{
+			Id:             log.Id,
+			UserName:       log.UserName,
+			Operation:      log.Operation,
+			Method:         log.Method,
+			Params:         log.Params,
+			Time:           log.Time,
+			Ip:             log.Ip,
+			CreateBy:       log.CreateBy,
+			CreateTime:     log.CreateTime.Format("2006-01-02 15:04:05"),
+			LastUpdateBy:   log.LastUpdateBy,
+			LastUpdateTime: log.LastUpdateTime.Format("2006-01-02 15:04:05"),
+		})
+	}
+
+	return &sys.SysLogListResp{
+		Total: count,
+		List:  list,
+	}, nil
+
 }
