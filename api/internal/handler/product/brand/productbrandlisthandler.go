@@ -1,15 +1,16 @@
-package brand
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/product/brand"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/product/brand"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func ProductBrandListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ProductBrandListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListProductBrandReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func ProductBrandListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := brand.NewProductBrandListLogic(r.Context(), svcCtx)
-		resp, err := l.ProductBrandList(&req)
+		l := logic.NewProductBrandListLogic(r.Context(), ctx)
+		resp, err := l.ProductBrandList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

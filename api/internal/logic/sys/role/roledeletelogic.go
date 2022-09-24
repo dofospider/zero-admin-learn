@@ -1,10 +1,12 @@
-package role
+package logic
 
 import (
 	"context"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/sys/sysclient"
 
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -15,16 +17,26 @@ type RoleDeleteLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewRoleDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleDeleteLogic {
-	return &RoleDeleteLogic{
+func NewRoleDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleDeleteLogic {
+	return RoleDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *RoleDeleteLogic) RoleDelete(req *types.DeleteRoleReq) (resp *types.DeleteRoleResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *RoleDeleteLogic) RoleDelete(req types.DeleteRoleReq) (*types.DeleteRoleResp, error) {
+	_, err := l.svcCtx.Sys.RoleDelete(l.ctx, &sysclient.RoleDeleteReq{
+		Id: req.Id,
+	})
 
-	return
+	if err != nil {
+		logx.WithContext(l.ctx).Errorf("根据roleId: %d,删除角色异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除角色失败")
+	}
+
+	return &types.DeleteRoleResp{
+		Code:    "000000",
+		Message: "删除角色成功",
+	}, nil
 }

@@ -1,15 +1,16 @@
-package homebrand
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/homebrand"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/homebrand"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func HomeBrandDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func HomeBrandDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteHomeBrandReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func HomeBrandDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := homebrand.NewHomeBrandDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.HomeBrandDelete(&req)
+		l := logic.NewHomeBrandDeleteLogic(r.Context(), ctx)
+		resp, err := l.HomeBrandDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

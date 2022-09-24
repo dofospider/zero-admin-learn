@@ -1,15 +1,16 @@
-package job
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sys/job"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sys/job"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func JobAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func JobAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.AddJobReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func JobAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := job.NewJobAddLogic(r.Context(), svcCtx)
-		resp, err := l.JobAdd(&req)
+		l := logic.NewJobAddLogic(r.Context(), ctx)
+		resp, err := l.JobAdd(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

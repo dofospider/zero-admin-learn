@@ -1,15 +1,16 @@
-package homebrand
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/homebrand"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/homebrand"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func HomeBrandListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func HomeBrandListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListHomeBrandReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func HomeBrandListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := homebrand.NewHomeBrandListLogic(r.Context(), svcCtx)
-		resp, err := l.HomeBrandList(&req)
+		l := logic.NewHomeBrandListLogic(r.Context(), ctx)
+		resp, err := l.HomeBrandList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -1,15 +1,16 @@
-package dict
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sys/dict"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sys/dict"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func DictAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DictAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.AddDictReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func DictAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := dict.NewDictAddLogic(r.Context(), svcCtx)
-		resp, err := l.DictAdd(&req)
+		l := logic.NewDictAddLogic(r.Context(), ctx)
+		resp, err := l.DictAdd(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -1,15 +1,16 @@
-package user
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sys/user"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sys/user"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func UserUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func UserUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.UpdateUserReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func UserUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := user.NewUserUpdateLogic(r.Context(), svcCtx)
-		resp, err := l.UserUpdate(&req)
+		l := logic.NewUserUpdateLogic(r.Context(), ctx)
+		resp, err := l.UserUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

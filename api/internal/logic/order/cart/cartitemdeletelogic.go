@@ -1,10 +1,11 @@
-package cart
+package logic
 
 import (
 	"context"
-
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+	"zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -15,16 +16,25 @@ type CartItemDeleteLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartItemDeleteLogic {
-	return &CartItemDeleteLogic{
+func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartItemDeleteLogic {
+	return CartItemDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *CartItemDeleteLogic) CartItemDelete(req *types.DeleteCartItemReq) (resp *types.DeleteCartItemResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *CartItemDeleteLogic) CartItemDelete(req types.DeleteCartItemReq) (*types.DeleteCartItemResp, error) {
+	_, err := l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{
+		Id: req.Id,
+	})
 
-	return
+	if err != nil {
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除购物车异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除购物车失败")
+	}
+	return &types.DeleteCartItemResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

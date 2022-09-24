@@ -1,15 +1,16 @@
-package operatehistory
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/order/operatehistory"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/order/operatehistory"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func OperateHistoryDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func OperateHistoryDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteOperateHistoryReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func OperateHistoryDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := operatehistory.NewOperateHistoryDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.OperateHistoryDelete(&req)
+		l := logic.NewOperateHistoryDeleteLogic(r.Context(), ctx)
+		resp, err := l.OperateHistoryDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

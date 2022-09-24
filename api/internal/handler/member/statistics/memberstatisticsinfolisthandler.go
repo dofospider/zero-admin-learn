@@ -1,15 +1,16 @@
-package statistics
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/member/statistics"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/member/statistics"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func MemberStatisticsInfoListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func MemberStatisticsInfoListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListMemberStatisticsInfoReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func MemberStatisticsInfoListHandler(svcCtx *svc.ServiceContext) http.HandlerFun
 			return
 		}
 
-		l := statistics.NewMemberStatisticsInfoListLogic(r.Context(), svcCtx)
-		resp, err := l.MemberStatisticsInfoList(&req)
+		l := logic.NewMemberStatisticsInfoListLogic(r.Context(), ctx)
+		resp, err := l.MemberStatisticsInfoList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

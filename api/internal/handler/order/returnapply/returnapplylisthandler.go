@@ -1,15 +1,16 @@
-package returnapply
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/order/returnapply"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/order/returnapply"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func ReturnApplyListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ReturnApplyListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListReturnApplyReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func ReturnApplyListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := returnapply.NewReturnApplyListLogic(r.Context(), svcCtx)
-		resp, err := l.ReturnApplyList(&req)
+		l := logic.NewReturnApplyListLogic(r.Context(), ctx)
+		resp, err := l.ReturnApplyList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -1,10 +1,12 @@
-package category
+package logic
 
 import (
 	"context"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/pms/pmsclient"
 
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -15,16 +17,26 @@ type ProductCategoryDeleteLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductCategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductCategoryDeleteLogic {
-	return &ProductCategoryDeleteLogic{
+func NewProductCategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) ProductCategoryDeleteLogic {
+	return ProductCategoryDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req *types.DeleteProductCategoryReq) (resp *types.DeleteProductCategoryResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req types.DeleteProductCategoryReq) (*types.DeleteProductCategoryResp, error) {
+	_, err := l.svcCtx.Pms.ProductCategoryDelete(l.ctx, &pmsclient.ProductCategoryDeleteReq{
+		Id: req.Id,
+	})
 
-	return
+	if err != nil {
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除商品类别异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除商品类别失败")
+	}
+
+	return &types.DeleteProductCategoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

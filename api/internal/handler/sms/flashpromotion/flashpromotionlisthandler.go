@@ -1,15 +1,16 @@
-package flashpromotion
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/flashpromotion"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/flashpromotion"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func FlashPromotionListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func FlashPromotionListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListFlashPromotionReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func FlashPromotionListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := flashpromotion.NewFlashPromotionListLogic(r.Context(), svcCtx)
-		resp, err := l.FlashPromotionList(&req)
+		l := logic.NewFlashPromotionListLogic(r.Context(), ctx)
+		resp, err := l.FlashPromotionList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

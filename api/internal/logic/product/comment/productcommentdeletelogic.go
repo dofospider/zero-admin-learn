@@ -1,10 +1,12 @@
-package comment
+package logic
 
 import (
 	"context"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/pms/pmsclient"
 
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -15,16 +17,26 @@ type ProductCommentDeleteLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductCommentDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductCommentDeleteLogic {
-	return &ProductCommentDeleteLogic{
+func NewProductCommentDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) ProductCommentDeleteLogic {
+	return ProductCommentDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *ProductCommentDeleteLogic) ProductCommentDelete(req *types.DeleteProductCommentReq) (resp *types.DeleteProductCommentResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *ProductCommentDeleteLogic) ProductCommentDelete(req types.DeleteProductCommentReq) (*types.DeleteProductCommentResp, error) {
+	_, err := l.svcCtx.Pms.CommentDelete(l.ctx, &pmsclient.CommentDeleteReq{
+		Id: req.Id,
+	})
 
-	return
+	if err != nil {
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除商品评价异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除商品评价失败")
+	}
+
+	return &types.DeleteProductCommentResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

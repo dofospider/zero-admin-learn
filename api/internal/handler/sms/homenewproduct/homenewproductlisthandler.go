@@ -1,15 +1,16 @@
-package homenewproduct
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/homenewproduct"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/homenewproduct"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func HomeNewProductListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func HomeNewProductListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListHomeNewProductReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func HomeNewProductListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := homenewproduct.NewHomeNewProductListLogic(r.Context(), svcCtx)
-		resp, err := l.HomeNewProductList(&req)
+		l := logic.NewHomeNewProductListLogic(r.Context(), ctx)
+		resp, err := l.HomeNewProductList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

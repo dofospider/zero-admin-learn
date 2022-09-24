@@ -1,15 +1,16 @@
-package memberprice
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/product/memberprice"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/product/memberprice"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func MemberPriceListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func MemberPriceListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListMemberPriceReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func MemberPriceListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := memberprice.NewMemberPriceListLogic(r.Context(), svcCtx)
-		resp, err := l.MemberPriceList(&req)
+		l := logic.NewMemberPriceListLogic(r.Context(), ctx)
+		resp, err := l.MemberPriceList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

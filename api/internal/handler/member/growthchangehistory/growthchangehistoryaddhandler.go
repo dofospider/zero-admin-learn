@@ -1,15 +1,16 @@
-package growthchangehistory
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/member/growthchangehistory"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/member/growthchangehistory"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func GrowthChangeHistoryAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func GrowthChangeHistoryAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.AddGrowthChangeHistoryReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func GrowthChangeHistoryAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc 
 			return
 		}
 
-		l := growthchangehistory.NewGrowthChangeHistoryAddLogic(r.Context(), svcCtx)
-		resp, err := l.GrowthChangeHistoryAdd(&req)
+		l := logic.NewGrowthChangeHistoryAddLogic(r.Context(), ctx)
+		resp, err := l.GrowthChangeHistoryAdd(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

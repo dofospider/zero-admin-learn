@@ -1,15 +1,16 @@
-package cart
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/order/cart"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/order/cart"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func CartItemAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CartItemAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.AddCartItemReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func CartItemAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := cart.NewCartItemAddLogic(r.Context(), svcCtx)
-		resp, err := l.CartItemAdd(&req)
+		l := logic.NewCartItemAddLogic(r.Context(), ctx)
+		resp, err := l.CartItemAdd(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

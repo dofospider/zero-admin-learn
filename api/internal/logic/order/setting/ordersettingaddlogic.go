@@ -1,10 +1,13 @@
-package setting
+package logic
 
 import (
 	"context"
+	"encoding/json"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/oms/omsclient"
 
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -15,16 +18,31 @@ type OrderSettingAddLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderSettingAddLogic {
-	return &OrderSettingAddLogic{
+func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderSettingAddLogic {
+	return OrderSettingAddLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *OrderSettingAddLogic) OrderSettingAdd(req *types.AddOrderSettingReq) (resp *types.AddOrderSettingResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *OrderSettingAddLogic) OrderSettingAdd(req types.AddOrderSettingReq) (*types.AddOrderSettingResp, error) {
+	_, err := l.svcCtx.Oms.OrderSettingAdd(l.ctx, &omsclient.OrderSettingAddReq{
+		FlashOrderOvertime:  req.FlashOrderOvertime,
+		NormalOrderOvertime: req.NormalOrderOvertime,
+		ConfirmOvertime:     req.ConfirmOvertime,
+		FinishOvertime:      req.FinishOvertime,
+		CommentOvertime:     req.CommentOvertime,
+	})
 
-	return
+	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.WithContext(l.ctx).Errorf("添加订单设置信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, errorx.NewDefaultError("添加订单设置失败")
+	}
+
+	return &types.AddOrderSettingResp{
+		Code:    "000000",
+		Message: "添加订单设置成功",
+	}, nil
 }

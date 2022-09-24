@@ -1,15 +1,16 @@
-package homeadvertise
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/homeadvertise"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/homeadvertise"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func HomeAdvertiseListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func HomeAdvertiseListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListHomeAdvertiseReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func HomeAdvertiseListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := homeadvertise.NewHomeAdvertiseListLogic(r.Context(), svcCtx)
-		resp, err := l.HomeAdvertiseList(&req)
+		l := logic.NewHomeAdvertiseListLogic(r.Context(), ctx)
+		resp, err := l.HomeAdvertiseList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

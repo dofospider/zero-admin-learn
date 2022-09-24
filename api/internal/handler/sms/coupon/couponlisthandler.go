@@ -1,15 +1,16 @@
-package coupon
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/coupon"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/coupon"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func CouponListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CouponListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListCouponReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func CouponListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := coupon.NewCouponListLogic(r.Context(), svcCtx)
-		resp, err := l.CouponList(&req)
+		l := logic.NewCouponListLogic(r.Context(), ctx)
+		resp, err := l.CouponList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

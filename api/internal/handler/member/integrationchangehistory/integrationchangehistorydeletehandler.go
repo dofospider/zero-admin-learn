@@ -1,15 +1,16 @@
-package integrationchangehistory
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/member/integrationchangehistory"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/member/integrationchangehistory"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func IntegrationChangeHistoryDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func IntegrationChangeHistoryDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteIntegrationChangeHistoryReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func IntegrationChangeHistoryDeleteHandler(svcCtx *svc.ServiceContext) http.Hand
 			return
 		}
 
-		l := integrationchangehistory.NewIntegrationChangeHistoryDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.IntegrationChangeHistoryDelete(&req)
+		l := logic.NewIntegrationChangeHistoryDeleteLogic(r.Context(), ctx)
+		resp, err := l.IntegrationChangeHistoryDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

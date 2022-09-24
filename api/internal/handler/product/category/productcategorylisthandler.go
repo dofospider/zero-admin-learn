@@ -1,15 +1,16 @@
-package category
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/product/category"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/product/category"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func ProductCategoryListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ProductCategoryListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ListProductCategoryReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func ProductCategoryListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := category.NewProductCategoryListLogic(r.Context(), svcCtx)
-		resp, err := l.ProductCategoryList(&req)
+		l := logic.NewProductCategoryListLogic(r.Context(), ctx)
+		resp, err := l.ProductCategoryList(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -1,15 +1,16 @@
-package tag
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/member/tag"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/member/tag"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func MemberTagDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func MemberTagDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteMemberTagReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func MemberTagDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := tag.NewMemberTagDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.MemberTagDelete(&req)
+		l := logic.NewMemberTagDeleteLogic(r.Context(), ctx)
+		resp, err := l.MemberTagDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

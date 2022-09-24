@@ -1,15 +1,16 @@
-package flashpromotionlog
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/flashpromotionlog"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/flashpromotionlog"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func FlashPromotionLogDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func FlashPromotionLogDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteFlashPromotionLogReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func FlashPromotionLogDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc
 			return
 		}
 
-		l := flashpromotionlog.NewFlashPromotionLogDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.FlashPromotionLogDelete(&req)
+		l := logic.NewFlashPromotionLogDeleteLogic(r.Context(), ctx)
+		resp, err := l.FlashPromotionLogDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

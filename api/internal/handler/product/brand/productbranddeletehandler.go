@@ -1,15 +1,16 @@
-package brand
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/product/brand"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/product/brand"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func ProductBrandDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ProductBrandDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteProductBrandReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func ProductBrandDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := brand.NewProductBrandDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.ProductBrandDelete(&req)
+		l := logic.NewProductBrandDeleteLogic(r.Context(), ctx)
+		resp, err := l.ProductBrandDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

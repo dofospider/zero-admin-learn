@@ -1,15 +1,16 @@
-package member
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/member/member"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/member/member"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func MemberUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func MemberUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.UpdateMemberReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func MemberUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := member.NewMemberUpdateLogic(r.Context(), svcCtx)
-		resp, err := l.MemberUpdate(&req)
+		l := logic.NewMemberUpdateLogic(r.Context(), ctx)
+		resp, err := l.MemberUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

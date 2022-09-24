@@ -1,15 +1,16 @@
-package homeadvertise
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/sms/homeadvertise"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/sms/homeadvertise"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func HomeAdvertiseDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func HomeAdvertiseDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteHomeAdvertiseReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func HomeAdvertiseDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := homeadvertise.NewHomeAdvertiseDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.HomeAdvertiseDelete(&req)
+		l := logic.NewHomeAdvertiseDeleteLogic(r.Context(), ctx)
+		resp, err := l.HomeAdvertiseDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -1,15 +1,16 @@
-package returnreason
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/order/returnreason"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/order/returnreason"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func ReturnResonUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ReturnResonUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.UpdateReturnResonReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func ReturnResonUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := returnreason.NewReturnResonUpdateLogic(r.Context(), svcCtx)
-		resp, err := l.ReturnResonUpdate(&req)
+		l := logic.NewReturnResonUpdateLogic(r.Context(), ctx)
+		resp, err := l.ReturnResonUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

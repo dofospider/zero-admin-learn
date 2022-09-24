@@ -1,15 +1,16 @@
-package compayaddress
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/order/compayaddress"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/order/compayaddress"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func CompayAddressUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CompayAddressUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.UpdateCompayAddressReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func CompayAddressUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := compayaddress.NewCompayAddressUpdateLogic(r.Context(), svcCtx)
-		resp, err := l.CompayAddressUpdate(&req)
+		l := logic.NewCompayAddressUpdateLogic(r.Context(), ctx)
+		resp, err := l.CompayAddressUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

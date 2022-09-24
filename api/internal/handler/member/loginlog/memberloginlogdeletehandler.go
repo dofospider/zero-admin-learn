@@ -1,15 +1,16 @@
-package loginlog
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/member/loginlog"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/member/loginlog"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func MemberLoginLogDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func MemberLoginLogDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteMemberLoginLogReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func MemberLoginLogDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := loginlog.NewMemberLoginLogDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.MemberLoginLogDelete(&req)
+		l := logic.NewMemberLoginLogDeleteLogic(r.Context(), ctx)
+		resp, err := l.MemberLoginLogDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

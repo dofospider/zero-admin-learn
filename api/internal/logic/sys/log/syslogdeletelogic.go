@@ -1,10 +1,12 @@
-package log
+package logic
 
 import (
 	"context"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/sys/sysclient"
 
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -15,16 +17,25 @@ type SysLogDeleteLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewSysLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLogDeleteLogic {
-	return &SysLogDeleteLogic{
+func NewSysLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) SysLogDeleteLogic {
+	return SysLogDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *SysLogDeleteLogic) SysLogDelete(req *types.DeleteSysLogReq) (resp *types.DeleteSysLogResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *SysLogDeleteLogic) SysLogDelete(req types.DeleteSysLogReq) (*types.DeleteSysLogResp, error) {
+	_, err := l.svcCtx.Sys.SysLogDelete(l.ctx, &sysclient.SysLogDeleteReq{
+		Id: req.Id,
+	})
 
-	return
+	if err != nil {
+		return nil, errorx.NewDefaultError("删除操作日志失败")
+	}
+
+	return &types.DeleteSysLogResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

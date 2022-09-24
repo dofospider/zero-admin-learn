@@ -1,15 +1,16 @@
-package skustock
+package handler
 
 import (
 	"net/http"
 
+	"zero-admin/api/internal/logic/product/skustock"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin-learn/api/internal/logic/product/skustock"
-	"zero-admin-learn/api/internal/svc"
-	"zero-admin-learn/api/internal/types"
 )
 
-func SkuStockUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func SkuStockUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.UpdateSkuStockReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +18,8 @@ func SkuStockUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := skustock.NewSkuStockUpdateLogic(r.Context(), svcCtx)
-		resp, err := l.SkuStockUpdate(&req)
+		l := logic.NewSkuStockUpdateLogic(r.Context(), ctx)
+		resp, err := l.SkuStockUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
