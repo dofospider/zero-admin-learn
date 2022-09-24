@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package cmsclient;
+
+option go_package = "./cmsclient";
+
+message StreamReq {
+  string name = 1;
+}
+
+message StreamResp {
+  string greet = 1;
+}
+
+service Cms {
+  rpc greet(StreamReq) returns (StreamResp);
+}
