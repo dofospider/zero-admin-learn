@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"zero-admin/rpc/model/umsmodel"
+	"zero-admin-learn/rpc/model/umsmodel"
 
-	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin-learn/rpc/ums/internal/svc"
+	"zero-admin-learn/rpc/ums/ums"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

@@ -6,7 +6,7 @@ package sys
 import (
 	"context"
 
-	"zero-admin/rpc/sys/sysclient"
+	"zero-admin-learn/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

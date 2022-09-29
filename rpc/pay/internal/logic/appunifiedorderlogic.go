@@ -9,9 +9,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
-	"zero-admin/rpc/model/paymodel"
-	"zero-admin/rpc/pay/internal/svc"
-	"zero-admin/rpc/pay/pay"
+	"zero-admin-learn/rpc/model/paymodel"
+	"zero-admin-learn/rpc/pay/internal/svc"
+	"zero-admin-learn/rpc/pay/pay"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -67,7 +67,8 @@ func (l *AppUnifiedOrderLogic) AppUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Un
 	return &pay.UnifiedOrderResp{}, nil
 }
 
-/**
+/*
+*
 构建app支付统一下单参数
 */
 func appPay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayResponse, err error) {

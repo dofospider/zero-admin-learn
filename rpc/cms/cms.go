@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"zero-admin/rpc/cms/cmsclient"
-	"zero-admin/rpc/cms/internal/config"
-	"zero-admin/rpc/cms/internal/server"
-	"zero-admin/rpc/cms/internal/svc"
+	"zero-admin-learn/rpc/cms/cmsclient"
+	"zero-admin-learn/rpc/cms/internal/config"
+	"zero-admin-learn/rpc/cms/internal/server"
+	"zero-admin-learn/rpc/cms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

@@ -4,14 +4,14 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/rest"
 	"github.com/zeromicro/go-zero/zrpc"
-	"zero-admin/api/internal/config"
-	"zero-admin/api/internal/middleware"
-	"zero-admin/rpc/cms/cms"
-	"zero-admin/rpc/oms/oms"
-	"zero-admin/rpc/pms/pms"
-	"zero-admin/rpc/sms/sms"
-	"zero-admin/rpc/sys/sys"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin-learn/api/internal/config"
+	"zero-admin-learn/api/internal/middleware"
+	"zero-admin-learn/rpc/cms/cms"
+	"zero-admin-learn/rpc/oms/oms"
+	"zero-admin-learn/rpc/pms/pms"
+	"zero-admin-learn/rpc/sms/sms"
+	"zero-admin-learn/rpc/sys/sys"
+	"zero-admin-learn/rpc/ums/ums"
 )
 
 type ServiceContext struct {

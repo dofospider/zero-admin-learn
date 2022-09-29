@@ -2,11 +2,11 @@ package logic
 
 import (
 	"context"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/rpc/sms/smsclient"
+	"zero-admin-learn/api/internal/common/errorx"
+	"zero-admin-learn/rpc/sms/smsclient"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"zero-admin-learn/api/internal/svc"
+	"zero-admin-learn/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -36,7 +36,7 @@ func (l *FlashPromotionDeleteLogic) FlashPromotionDelete(req types.DeleteFlashPr
 	}
 
 	return &types.DeleteFlashPromotionResp{
-		Code:    "000000",
+		Code: "000000",
 		Message: "",
 	}, nil
 }

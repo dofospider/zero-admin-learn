@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/rpc/ums/umsclient"
+	"zero-admin-learn/api/internal/common/errorx"
+	"zero-admin-learn/rpc/ums/umsclient"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"zero-admin-learn/api/internal/svc"
+	"zero-admin-learn/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

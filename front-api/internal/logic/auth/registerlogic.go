@@ -3,11 +3,11 @@ package auth
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/ums/ums"
-	"zero-admin/rpc/ums/umsclient"
+	"zero-admin-learn/rpc/ums/ums"
+	"zero-admin-learn/rpc/ums/umsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"zero-admin-learn/front-api/internal/svc"
+	"zero-admin-learn/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -39,7 +39,7 @@ func (l *RegisterLogic) Register(req types.RegisterReq) (resp *types.LoginAndReg
 	return buildRegisterMemberResp(memberAddResp)
 }
 
-//构建返回数据
+// 构建返回数据
 func buildRegisterMemberResp(memberAddResp *ums.MemberAddResp) (*types.LoginAndRegisterResp, error) {
 	userInfo := types.UserInfo{
 		NickName:  memberAddResp.Nickname,

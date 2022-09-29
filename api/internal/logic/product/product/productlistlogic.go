@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin-learn/api/internal/common/errorx"
+	"zero-admin-learn/api/internal/svc"
+	"zero-admin-learn/api/internal/types"
+	"zero-admin-learn/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

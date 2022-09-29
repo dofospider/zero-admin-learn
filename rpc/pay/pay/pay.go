@@ -6,7 +6,7 @@ package pay
 import (
 	"context"
 
-	"zero-admin/rpc/pay/payclient"
+	"zero-admin-learn/rpc/pay/payclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

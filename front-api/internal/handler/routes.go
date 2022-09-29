@@ -4,15 +4,15 @@ package handler
 import (
 	"net/http"
 
-	address "zero-admin/front-api/internal/handler/address"
-	auth "zero-admin/front-api/internal/handler/auth"
-	cart "zero-admin/front-api/internal/handler/cart"
-	category "zero-admin/front-api/internal/handler/category"
-	collect "zero-admin/front-api/internal/handler/collect"
-	home "zero-admin/front-api/internal/handler/home"
-	order "zero-admin/front-api/internal/handler/order"
-	product "zero-admin/front-api/internal/handler/product"
-	"zero-admin/front-api/internal/svc"
+	address "zero-admin-learn/front-api/internal/handler/address"
+	auth "zero-admin-learn/front-api/internal/handler/auth"
+	cart "zero-admin-learn/front-api/internal/handler/cart"
+	category "zero-admin-learn/front-api/internal/handler/category"
+	collect "zero-admin-learn/front-api/internal/handler/collect"
+	home "zero-admin-learn/front-api/internal/handler/home"
+	order "zero-admin-learn/front-api/internal/handler/order"
+	product "zero-admin-learn/front-api/internal/handler/product"
+	"zero-admin-learn/front-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

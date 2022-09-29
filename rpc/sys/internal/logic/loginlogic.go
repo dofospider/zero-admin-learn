@@ -7,8 +7,8 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"time"
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin-learn/rpc/sys/internal/svc"
+	"zero-admin-learn/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +27,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 	}
 }
 
-//根据用户名和密码登录
+// 根据用户名和密码登录
 func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 	userInfo, err := l.svcCtx.UserModel.FindOneByName(in.UserName)
 

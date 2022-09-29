@@ -3,10 +3,10 @@ package collect
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin-learn/rpc/pms/pmsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"zero-admin-learn/front-api/internal/svc"
+	"zero-admin-learn/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

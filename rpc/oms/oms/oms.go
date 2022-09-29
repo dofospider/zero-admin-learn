@@ -6,7 +6,7 @@ package oms
 import (
 	"context"
 
-	"zero-admin/rpc/oms/omsclient"
+	"zero-admin-learn/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

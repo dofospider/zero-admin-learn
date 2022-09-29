@@ -6,14 +6,14 @@ package main
 import (
 	"flag"
 	"fmt"
-	"zero-admin/rpc/pay/payclient"
+	"zero-admin-learn/rpc/pay/payclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
-	"zero-admin/rpc/pay/internal/config"
-	"zero-admin/rpc/pay/internal/server"
-	"zero-admin/rpc/pay/internal/svc"
+	"zero-admin-learn/rpc/pay/internal/config"
+	"zero-admin-learn/rpc/pay/internal/server"
+	"zero-admin-learn/rpc/pay/internal/svc"
 )
 
 var configFile = flag.String("f", "rpc/pay/etc/pay.yaml", "the config file")

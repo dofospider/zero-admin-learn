@@ -6,14 +6,14 @@ package main
 import (
 	"flag"
 	"fmt"
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin-learn/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
-	"zero-admin/rpc/pms/internal/config"
-	"zero-admin/rpc/pms/internal/server"
-	"zero-admin/rpc/pms/internal/svc"
+	"zero-admin-learn/rpc/pms/internal/config"
+	"zero-admin-learn/rpc/pms/internal/server"
+	"zero-admin-learn/rpc/pms/internal/svc"
 )
 
 var configFile = flag.String("f", "rpc/pms/etc/pms.yaml", "the config file")

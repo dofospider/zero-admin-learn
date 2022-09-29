@@ -6,7 +6,7 @@ package sms
 import (
 	"context"
 
-	"zero-admin/rpc/sms/smsclient"
+	"zero-admin-learn/rpc/sms/smsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

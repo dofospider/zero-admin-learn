@@ -6,7 +6,7 @@ package ums
 import (
 	"context"
 
-	"zero-admin/rpc/ums/umsclient"
+	"zero-admin-learn/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 	"strconv"
-	"zero-admin/rpc/sys/sysclient"
+	"zero-admin-learn/rpc/sys/sysclient"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"zero-admin-learn/api/internal/svc"
+	"zero-admin-learn/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

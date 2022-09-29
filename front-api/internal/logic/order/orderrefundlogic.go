@@ -3,10 +3,10 @@ package order
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/oms/omsclient"
+	"zero-admin-learn/rpc/oms/omsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"zero-admin-learn/front-api/internal/svc"
+	"zero-admin-learn/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

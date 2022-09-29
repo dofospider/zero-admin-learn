@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/cart"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"zero-admin-learn/front-api/internal/logic/cart"
+	"zero-admin-learn/front-api/internal/svc"
+	"zero-admin-learn/front-api/internal/types"
 )
 
 func CartCheckOutHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

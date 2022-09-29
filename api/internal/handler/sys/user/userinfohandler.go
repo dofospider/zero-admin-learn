@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/api/internal/logic/sys/user"
-	"zero-admin/api/internal/svc"
+	"zero-admin-learn/api/internal/logic/sys/user"
+	"zero-admin-learn/api/internal/svc"
 )
 
 func UserInfoHandler(ctx *svc.ServiceContext) http.HandlerFunc {

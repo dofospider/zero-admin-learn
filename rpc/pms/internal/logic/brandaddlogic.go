@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"zero-admin/rpc/model/pmsmodel"
+	"zero-admin-learn/rpc/model/pmsmodel"
 
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pms"
+	"zero-admin-learn/rpc/pms/internal/svc"
+	"zero-admin-learn/rpc/pms/pms"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

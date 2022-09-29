@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/cms/cmsclient"
-	"zero-admin/rpc/cms/internal/logic"
-	"zero-admin/rpc/cms/internal/svc"
+	"zero-admin-learn/rpc/cms/cmsclient"
+	"zero-admin-learn/rpc/cms/internal/logic"
+	"zero-admin-learn/rpc/cms/internal/svc"
 )
 
 type CmsServer struct {

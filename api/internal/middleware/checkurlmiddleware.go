@@ -8,7 +8,7 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
 	"strings"
-	"zero-admin/api/internal/common/errorx"
+	"zero-admin-learn/api/internal/common/errorx"
 )
 
 type CheckUrlMiddleware struct {

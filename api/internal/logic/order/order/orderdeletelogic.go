@@ -2,11 +2,11 @@ package logic
 
 import (
 	"context"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/rpc/oms/omsclient"
+	"zero-admin-learn/api/internal/common/errorx"
+	"zero-admin-learn/rpc/oms/omsclient"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"zero-admin-learn/api/internal/svc"
+	"zero-admin-learn/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +27,7 @@ func NewOrderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderD
 
 func (l *OrderDeleteLogic) OrderDelete(req types.DeleteOrderReq) (*types.DeleteOrderResp, error) {
 	_, err := l.svcCtx.Oms.OrderDelete(l.ctx, &omsclient.OrderDeleteReq{
-		Id: req.Id,
+		//Id:= req.Id, # unuseed var Id
 	})
 
 	if err != nil {

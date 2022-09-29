@@ -6,7 +6,7 @@ package pms
 import (
 	"context"
 
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin-learn/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

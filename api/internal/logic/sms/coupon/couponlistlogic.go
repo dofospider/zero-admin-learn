@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
-	"zero-admin/rpc/sms/smsclient"
+	"zero-admin-learn/api/internal/common/errorx"
+	"zero-admin-learn/api/internal/svc"
+	"zero-admin-learn/api/internal/types"
+	"zero-admin-learn/rpc/sms/smsclient"
 )
 
 type CouponListLogic struct {

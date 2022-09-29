@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 	"time"
-	"zero-admin/rpc/model/pmsmodel"
+	"zero-admin-learn/rpc/model/pmsmodel"
 
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin-learn/rpc/pms/internal/svc"
+	"zero-admin-learn/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -38,7 +38,7 @@ func (l *CollectAddOrDeleteLogic) CollectAddOrDelete(in *pmsclient.CollectAddOrD
 
 }
 
-//删除收藏
+// 删除收藏
 func deleteCollect(l *CollectAddOrDeleteLogic, collect *pmsmodel.PmsCollect) (*pmsclient.CollectAddOrDeleteResp, error) {
 	err := l.svcCtx.PmsCollectModel.Delete(int64(collect.Id))
 	return &pmsclient.CollectAddOrDeleteResp{
@@ -46,7 +46,7 @@ func deleteCollect(l *CollectAddOrDeleteLogic, collect *pmsmodel.PmsCollect) (*p
 	}, err
 }
 
-//添加收藏
+// 添加收藏
 func insertCollect(in *pmsclient.CollectAddOrDeleteReq, l *CollectAddOrDeleteLogic) (*pmsclient.CollectAddOrDeleteResp, error) {
 	_, err := l.svcCtx.PmsCollectModel.Insert(pmsmodel.PmsCollect{
 		UserId:      in.MemberId,

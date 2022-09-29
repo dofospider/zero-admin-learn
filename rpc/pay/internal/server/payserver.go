@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/pay/internal/logic"
-	"zero-admin/rpc/pay/internal/svc"
-	"zero-admin/rpc/pay/payclient"
+	"zero-admin-learn/rpc/pay/internal/logic"
+	"zero-admin-learn/rpc/pay/internal/svc"
+	"zero-admin-learn/rpc/pay/payclient"
 )
 
 type PayServer struct {

@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 	"time"
-	"zero-admin/rpc/model/smsmodel"
+	"zero-admin-learn/rpc/model/smsmodel"
 
-	"zero-admin/rpc/sms/internal/svc"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin-learn/rpc/sms/internal/svc"
+	"zero-admin-learn/rpc/sms/sms"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

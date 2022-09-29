@@ -4,9 +4,9 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
 	"time"
-	"zero-admin/rpc/model/sysmodel"
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin-learn/rpc/model/sysmodel"
+	"zero-admin-learn/rpc/sys/internal/svc"
+	"zero-admin-learn/rpc/sys/sys"
 )
 
 type UpdateMenuRoleLogic struct {

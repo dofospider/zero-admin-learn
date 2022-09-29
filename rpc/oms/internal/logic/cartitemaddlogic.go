@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 	"time"
-	"zero-admin/rpc/model/omsmodel"
-	"zero-admin/rpc/oms/internal/svc"
-	"zero-admin/rpc/oms/oms"
+	"zero-admin-learn/rpc/model/omsmodel"
+	"zero-admin-learn/rpc/oms/internal/svc"
+	"zero-admin-learn/rpc/oms/oms"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

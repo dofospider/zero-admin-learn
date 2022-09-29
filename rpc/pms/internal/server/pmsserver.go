@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/pms/internal/logic"
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin-learn/rpc/pms/internal/logic"
+	"zero-admin-learn/rpc/pms/internal/svc"
+	"zero-admin-learn/rpc/pms/pmsclient"
 )
 
 type PmsServer struct {

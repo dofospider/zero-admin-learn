@@ -2,11 +2,11 @@ package logic
 
 import (
 	"context"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin-learn/api/internal/common/errorx"
+	"zero-admin-learn/rpc/pms/pmsclient"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"zero-admin-learn/api/internal/svc"
+	"zero-admin-learn/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -36,7 +36,7 @@ func (l *SkuStockDeleteLogic) SkuStockDelete(req types.DeleteSkuStockReq) (*type
 	}
 
 	return &types.DeleteSkuStockResp{
-		Code:    "000000",
+		Code: "000000",
 		Message: "",
 	}, nil
 }

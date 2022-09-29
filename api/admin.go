@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
-	"zero-admin/api/internal/common/errorx"
+	"zero-admin-learn/api/internal/common/errorx"
 
-	"zero-admin/api/internal/config"
-	"zero-admin/api/internal/handler"
-	"zero-admin/api/internal/svc"
+	"zero-admin-learn/api/internal/config"
+	"zero-admin-learn/api/internal/handler"
+	"zero-admin-learn/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

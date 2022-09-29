@@ -7,10 +7,10 @@ import (
 	"flag"
 	"fmt"
 
-	"zero-admin/rpc/ums/internal/config"
-	"zero-admin/rpc/ums/internal/server"
-	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/umsclient"
+	"zero-admin-learn/rpc/ums/internal/config"
+	"zero-admin-learn/rpc/ums/internal/server"
+	"zero-admin-learn/rpc/ums/internal/svc"
+	"zero-admin-learn/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"

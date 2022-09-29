@@ -7,10 +7,10 @@ import (
 	"flag"
 	"fmt"
 
-	"zero-admin/rpc/sms/internal/config"
-	"zero-admin/rpc/sms/internal/server"
-	"zero-admin/rpc/sms/internal/svc"
-	"zero-admin/rpc/sms/smsclient"
+	"zero-admin-learn/rpc/sms/internal/config"
+	"zero-admin-learn/rpc/sms/internal/server"
+	"zero-admin-learn/rpc/sms/internal/svc"
+	"zero-admin-learn/rpc/sms/smsclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"

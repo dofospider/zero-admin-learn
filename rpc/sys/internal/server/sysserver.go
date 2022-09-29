@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/sys/internal/logic"
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sysclient"
+	"zero-admin-learn/rpc/sys/internal/logic"
+	"zero-admin-learn/rpc/sys/internal/svc"
+	"zero-admin-learn/rpc/sys/sysclient"
 )
 
 type SysServer struct {

@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-	"zero-admin/rpc/cms/cms"
+	"zero-admin-learn/rpc/cms/cms"
 
-	"zero-admin/rpc/cms/internal/svc"
+	"zero-admin-learn/rpc/cms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

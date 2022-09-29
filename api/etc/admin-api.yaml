@@ -6,42 +6,42 @@ Port: 8888
 SysRpc:
   Etcd:
     Hosts:
-      - localhost:2379
+      - etcd:2379
     Key: sys.rpc
 
 #会员
 UmsRpc:
   Etcd:
     Hosts:
-      - localhost:2379
+      - etcd:2379
     Key: ums.rpc
 
 #商品
 PmsRpc:
   Etcd:
     Hosts:
-      - localhost:2379
+      - etcd:2379
     Key: pms.rpc
 
 #订单
 OmsRpc:
   Etcd:
     Hosts:
-      - localhost:2379
+      - etcd:2379
     Key: oms.rpc
 
 #营销
 SmsRpc:
   Etcd:
     Hosts:
-      - localhost:2379
+      - etcd:2379
     Key: sms.rpc
 
 #内容
 CmsRpc:
   Etcd:
     Hosts:
-      - localhost:2379
+      - etcd:2379
     Key: cms.rpc
 
 Auth:
@@ -49,10 +49,10 @@ Auth:
   AccessExpire: 86400
 
 Prometheus:
-  Host: 127.0.0.1
+  Host: 0.0.0.0
   Port: 8188
   Path: /metrics
 
 Redis:
-  Address: 127.0.0.1:6379
-  Pass: 123456
+  Address: redis:6379
+  Pass: "123456"

@@ -6,11 +6,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"zero-admin/rpc/oms/omsclient"
+	"zero-admin-learn/rpc/oms/omsclient"
 
-	"zero-admin/rpc/oms/internal/config"
-	"zero-admin/rpc/oms/internal/server"
-	"zero-admin/rpc/oms/internal/svc"
+	"zero-admin-learn/rpc/oms/internal/config"
+	"zero-admin-learn/rpc/oms/internal/server"
+	"zero-admin-learn/rpc/oms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"

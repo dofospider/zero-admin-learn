@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin-learn/rpc/sys/internal/svc"
+	"zero-admin-learn/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
