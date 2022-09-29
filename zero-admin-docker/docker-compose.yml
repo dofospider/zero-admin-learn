@@ -92,7 +92,7 @@ services:
       - backend
     restart: always
 
-  admin-api:
+  admin.api:
     build:
       context: ./admin.api
     environment:
